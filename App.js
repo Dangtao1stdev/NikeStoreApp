@@ -1,21 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import AppNavigationContainer from './src/navigation'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	let [fontsLoaded] = useFonts({
+		'CarmenSans-Regular': require('./src/assets/fonts/CarmenSans-Regular.otf'),
+		'CarmenSans-SemiBold': require('./src/assets/fonts/CarmenSans-SemiBold.otf'),
+		'CarmenSans-Thin': require('./src/assets/fonts/CarmenSans-Thin.otf'),
+		'CocoGothic-Bold': require('./src/assets/fonts/CocoGothic-Bold.ttf'),
+		CocoGothic: require('./src/assets/fonts/CocoGothic.ttf'),
+	})
+	if (!fontsLoaded) {
+		return <AppLoading />
+	}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return <AppNavigationContainer />
+}
